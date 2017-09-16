@@ -32,6 +32,39 @@ public class ThrusterManager {
             }else{
             }
         }
+        forceMapDict.Clear();
+        _addOrDictList (atmThs);
+        _addOrDictList (ionThs);
+        _addOrDictList (hyThs);
+    }
+
+    public Vector3D GetThrustAlongVector (Vector3D v) {
+        Vector3D maxThrust = Vector3D.Zero;
+        foreach (var kvp in forceMapDict) {
+            Vector3D dir = _getDir(kvp.Key);
+            if (v.Dot(dir) > 0) {
+                maxThrust += dir*kvp.Value;
+            }
+        }
+        return v * (maxThrust.Dot(v) / maxThrust.Length());
+    }
+
+    Vector3D _getDir (Base6Directions.Direction dir) {
+        switch (dir) {
+            case Base6Directions.Direction.Forward:
+                return pg.Me.CubeGrid.WorldMatrix.Forward;
+            case Base6Directions.Direction.Backward:
+                return pg.Me.CubeGrid.WorldMatrix.Backward;
+            case Base6Directions.Direction.Left:
+                return pg.Me.CubeGrid.WorldMatrix.Left;
+            case Base6Directions.Direction.Right:
+                return pg.Me.CubeGrid.WorldMatrix.Right;
+            case Base6Directions.Direction.Up:
+                return pg.Me.CubeGrid.WorldMatrix.Up;
+            case Base6Directions.Direction.Down:
+                return pg.Me.CubeGrid.WorldMatrix.Down;
+        }
+        throw new Exception ("this should never happen");
     }
 
     public Dictionary <Base6Directions.Direction, double> getOrDict () {
@@ -55,7 +88,7 @@ public class ThrusterManager {
     }
 
     void _addOrDictThruster (Thruster th) {
-        Base6Directions.Direction key = th.getOrientation().Forward;
+        Base6Directions.Direction key = th.getOrientation();
         double val = th.getForce();
         if (forceMapDict.ContainsKey(key)) {
             forceMapDict[key] += val;

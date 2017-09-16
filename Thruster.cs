@@ -12,7 +12,7 @@ public class Thruster {
     MyGridProgram pg;
 
     public double getForce () {
-        return th.MaxThrust;
+        return th.MaxEffectiveThrust;
     }
 
     public Thruster (IMyThrust t, MatrixD m, MyGridProgram argPg){
@@ -54,8 +54,8 @@ public class Thruster {
         FORCE.SetDim(FORCE_DIM,FORCE_MULT);
     }
 
-    public MyBlockOrientation getOrientation () {
-        return th.Orientation;
+    public Base6Directions.Direction getOrientation () {
+        return Base6Directions.GetFlippedDirection (th.Orientation.Forward);
     }
 
     public int get_type(){

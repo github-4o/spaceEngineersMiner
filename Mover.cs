@@ -50,8 +50,24 @@ public class Mover {
             // rc.CalculateShipMass().BaseMass) /10);
             rc.CalculateShipMass().BaseMass));
 
-        // Vector3D vn = Vector3D.Normalize (v);
-        // Vector3D velocityProjection = velocity * (velocity.Dot(vn) / velocity.Length());
+        Vector3D vn = Vector3D.Normalize (v);
+        Vector3D accAlongVector = tm.GetThrustAlongVector (vn);
+        double accAlongVectorLength = accAlongVector.Length();
+        pg.Echo ("accAlongVectorLength = \n" + accAlongVectorLength);
+
+        Vector3D velocityProjection = velocity * (velocity.Dot(vn) / velocity.Length());
+        double velocityProjectionLength = velocityProjection.Length();
+        pg.Echo ("velocityProjectionLength = \n" + velocityProjectionLength);
+
+        double breakingTime = velocityProjectionLength/accAlongVectorLength;
+        pg.Echo ("breakingTime = \n" + breakingTime);
+        double breakingDistance = 1.1*breakingTime*velocityProjectionLength/2;
+        pg.Echo ("breakingDistance = \n" + breakingDistance);
+
+        if (v.Length() < breakingDistance) {
+            // v = -v;
+            v = vn * (velocityProjectionLength-accAlongVectorLength);
+        }
 
         // if (tm.unobtainable (velocityProjection)) {
         //     vn = velocityProjection - velocity;
