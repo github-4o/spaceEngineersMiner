@@ -17,8 +17,6 @@ public class Goto {
 
     RemoteControl rc;
 
-    double breakingDistance = 100;
-
     public double distanceToTposSquared {
         get {
             if (distValid) {
