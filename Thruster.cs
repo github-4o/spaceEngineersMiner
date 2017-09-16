@@ -78,7 +78,7 @@ public class Thruster {
         }
         th.ApplyAction("OnOff_On");
         Vector3D force = FORCE;
-        force.Normalize();
+        // force.Normalize();
         double effectiveForce = th.MaxEffectiveThrust;
         force = force * effectiveForce;
         double vforce = v.GetDim(FORCE_DIM);
