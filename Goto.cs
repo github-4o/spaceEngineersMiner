@@ -1,6 +1,5 @@
 
 public class Goto {
-    bool old = false;
     MyGridProgram pg;
     Grid g;
     Mover mover;
