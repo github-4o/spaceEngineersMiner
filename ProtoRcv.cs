@@ -100,8 +100,8 @@ public class ProtoRcv : Proto {
         if (msgList.Count > 0) {
             msg = msgList[0];
             msgList.RemoveAt (0);
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 }

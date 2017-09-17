@@ -80,11 +80,6 @@ public class RequestValueOverRadio : FsmStateImplementation {
                     //     grid.Echo ("gotReply");
                     // }
                     if (proto.getVal(out _val)) {
-                        cnt ++;
-                        if (cnt > cntCap) {
-                            state = State.requestVal;
-                        }
-                    } else {
                         mem.setVar (outVarNames[0], _val.val);
                         if (outVarNames.Count > 1) {
                             mem.setVar (outVarNames[1], _val.sender);
@@ -93,6 +88,11 @@ public class RequestValueOverRadio : FsmStateImplementation {
                         proto.disable ();
                         // getReply = true;
                         return end();
+                    } else {
+                        cnt ++;
+                        if (cnt > cntCap) {
+                            state = State.requestVal;
+                        }
                     }
                     break;
             }
