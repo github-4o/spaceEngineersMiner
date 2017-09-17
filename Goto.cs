@@ -77,12 +77,14 @@ public class Goto {
         Vector3D togo = tpos - reference.GetPosition ();
         dist = togo;
         // if (old) {
-            // double len = togo.Length();
+            double len = togo.Length();
             // // if (len < breakingDistance*breakingDistance) {
             // //     togo.Normalize();
             // //     togo *=
             // // }
-            // if (len > breakingDistance) {
+            if (len > 100) {
+                togo /= (len/100);
+            }
             //     togo = Vector3D.Normalize (togo) * 10;
             // } else if (len < 7) {
             //     // togo *= 2;
