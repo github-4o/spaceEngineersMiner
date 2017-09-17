@@ -28,8 +28,8 @@ X="`cat DockPlanetary.cs`"
 Y="`cat ProtoStack.cs`"
 Z="`cat DockBasic.cs`"
 A1="`cat Proto.cs`"
-A2="`cat ProtoRcv.cs`"
-A3="`cat RadioMsg.cs`"
-A4="`cat Recharge.cs`"
-echo "$A" "$B" "$C" "$D" "$E" "$F" "$G" "$H" "$I" "$J" "$K" "$L" "$M" "$N" "$O" "$P" "$Q" "$R" "$S" "$T" "$U" "$V" "$W" "$X" "$Y" "$Z" "$A1" "$A2" "$A3" "$A4" > /dev/clipboard
+B1="`cat ProtoRcv.cs`"
+C1="`cat RadioMsg.cs`"
+D1="`cat Recharge.cs`"
+echo "$A" "$B" "$C" "$D" "$E" "$F" "$G" "$H" "$I" "$J" "$K" "$L" "$M" "$N" "$O" "$P" "$Q" "$R" "$S" "$T" "$U" "$V" "$W" "$X" "$Y" "$Z" "$A1" "$B1" "$C1" "$D1" > /dev/clipboard
 
