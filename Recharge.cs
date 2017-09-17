@@ -23,16 +23,18 @@ public class Recharge : FsmStateImplementation {
     }
 
     List<int> toRemove = new List<int>();
+    int num = 0;
 
     public override FsmState step () {
-        if (batts.Count == 0) {
+        // if (batts.Count == 0) {
             grid.gts.GetBlocksOfType (batts, x => x.CubeGrid == grid.Me.CubeGrid);
             for (int i=0;i<batts.Count;i++) {
                 batts[i].OnlyRecharge = true;
             }
             // grid.Echo ("hit " + batts.Count);
-            return this;
-        }
+        //     return this;
+        // }
+        grid.Echo ("num = " + num++);
         double minCharge = 100;
         double tmp = 0;
         // grid.Echo ("count = " + batts.Count);
@@ -42,13 +44,16 @@ public class Recharge : FsmStateImplementation {
                 batts.RemoveAt (i);
             } else {
                 tmp = batts[i].CurrentStoredPower / batts[i].MaxStoredPower;
+                grid.Echo (i.ToString() + ": c = " + batts[i].CurrentStoredPower);
+                grid.Echo (i.ToString() + ": input = " + batts[i].CurrentInput);
+                grid.Echo (i.ToString() + ": tmp = " + tmp);
                 if (tmp < minCharge) {
                     minCharge = tmp;
                 }
             }
         }
         grid.Echo (batts.Count.ToString() + ":min charge = " + minCharge);
-        if (minCharge > 0.50) {
+        if (minCharge > 0.90) {
             for (int i=0;i<batts.Count;i++) {
                 batts[i].OnlyRecharge = false;
             }
